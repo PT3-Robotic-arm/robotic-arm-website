@@ -18,7 +18,4 @@ Technical Institute project based on a [Dobot Magician](https://www.dobot.cc/dob
 
 ## Progression
 
-<div class="progress-bar-border" style="border: 2px solid black; width:100%;height:24px;border-radius:10%;">
- <div class="progress-bar" style="height:24px;width:20%;background-color: lightgreen;"></div>
-</div> 
 
