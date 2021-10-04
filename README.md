@@ -10,7 +10,7 @@ Technical Institute project based on a [Dobot Magician](https://www.dobot.cc/dob
 
 ## Technologies used
 
-- (three.js)[https://threejs.org/] library is used for the 3D model
+- [three.js](https://threejs.org/) library is used for the 3D model
 - WebUSB is used to communicate from arduino to the browser
 - Javascript is used to convert vectors into angular movements
 
