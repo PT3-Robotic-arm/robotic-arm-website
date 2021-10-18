@@ -98,6 +98,7 @@ function buttonForeArmFrontDown(){
     moveForeArm(sensivity)
 }
 function buttonForeArmBackDown(){
+    let sensivity = document.getElementById('sensivity-slider').value;
     isForeArmMoving = true;
     moveForeArm(-sensivity)
 }
