@@ -101,7 +101,7 @@ function buttonForeArmUp(){
 }
 
 
-let gridxbutton = document.getElementById("gridx-input");
+const gridxbutton = document.getElementById("gridx-input");
 gridxbutton.addEventListener('click', (event) => {
     if(gridxbutton.checked){
         gridX = true;
@@ -112,6 +112,29 @@ gridxbutton.addEventListener('click', (event) => {
     } 
 });
 
+const gridybutton = document.getElementById("gridy-input");
+gridybutton.addEventListener('change', (event) => {
+    if(gridybutton.checked){
+        gridY = true;
+        drawHelpers();
+    }else{
+        gridY = false;
+        Coordinates.clearGrid("y");
+    }
+    
+});
+
+const gridzbutton = document.getElementById("gridz-input");
+gridzbutton.addEventListener('change', (event) => {
+    if(gridzbutton.checked){
+        gridZ = true;
+        drawHelpers();
+    }else{
+        gridZ = false;
+        Coordinates.clearGrid("z");
+    }
+    
+});
 
 /*
 leftB =  document.getElementById("base-left");
