@@ -101,6 +101,18 @@ function buttonForeArmUp(){
 }
 
 
+let gridxbutton = document.getElementById("gridx-input");
+gridxbutton.addEventListener('click', (event) => {
+    if(gridxbutton.checked){
+        gridX = true;
+        drawHelpers();
+    }else if(gridxbutton.unchecked){
+        gridX = false;
+        drawHelpers();
+    } 
+});
+
+
 /*
 leftB =  document.getElementById("base-left");
 leftB.addEventListener('click', (event) => {

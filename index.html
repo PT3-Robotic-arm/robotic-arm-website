@@ -3,75 +3,67 @@
     <head>
         <meta charset=utf-8>
         <title>Bras Robotique</title>
+        <link rel="stylesheet" href="style.css">
         <!-- API importe du site de Three.js -->
         <script src="js/lib/three.js"></script>
         <script src="js/lib/OBJLoader.js"></script>
         <script src="js/lib/OrbitControls.js"></script>
         <script src="js/lib/dat.gui.min.js"></script>
-        <style>
-            body {
-                display: flex;
-                flex-direction: column;
-                justify-content: center;
-                align-items: center;
-                margin: auto 0;
-                text-align: center;
-                padding: 50px;
-            }
-
-            canvas {
-                width: 50%;
-                height: 50%
-            }
-
-            p, li {
-                text-align: left;
-            }
-        </style>
         <!-- Petit script pour avoir une grille avec des axes -->
         <script src="js/axes.js"></script>
     </head>
     <body>
-        <h1>Robotic arm viewer</h1>
-        <div class="control-panel">
-          <button type="button" name="button" id="base-left" 
-          onmousedown="buttonBaseLeftDown()"
-          onmouseup = "buttonBaseUp()">
-            LEFT 
-          </button>
-          
-          <button type="button" name="button" id="base-right"
-          onmousedown="buttonBaseRightDown()"
-          onmouseup = "buttonBaseUp()">
-            RIGHT
-          </button>
+          <div class="control-grid-panel">
+            <input type="checkbox" name="gridx" id="gridx-input">
+            <label for="gridx">Show GridX</label>
 
-          <button type="button" name="button" id="arm-front"
-          onmousedown="buttonArmFrontDown()"
-          onmouseup = "buttonArmUp()">
-            FRONT
-          </button>
-          <button type="button" name="button" id="arm-back"
-          onmousedown="buttonArmBackDown()"
-          onmouseup = "buttonArmUp()">
-            BACK
-          </button>
+            <input type="checkbox" name="gridy" id="gridy-input">
+            <label for="gridY">Show GridY</label>
 
-          <button type="button" name="button" id="arm-front"
-          onmousedown="buttonForeArmFrontDown()"
-          onmouseup = "buttonForeArmUp()">
-            FRONT
-          </button>
-          <button type="button" name="button" id="arm-back"
-          onmousedown="buttonForeArmBackDown()"
-          onmouseup = "buttonForeArmUp()">
-            BACK
-          </button>
-        </div>
+            <input type="checkbox" name="gridz" id="gridz-input">
+            <label for="gridZ">Show GridZ</label>
 
-        <p id="brasRobotique"></p>
-        <script src="js/controls.js"></script> <!-- Buttons + Keys Controls -->
-        <script src="js/robot.js"></script> <!-- Robotic Arm 3D model -->
+          </div>
+          <div class="control-panel">
+            <button type="button" name="button" id="base-left" 
+            onmousedown="buttonBaseLeftDown()"
+            onmouseup = "buttonBaseUp()">
+              LEFT 
+            </button>
+            
+            <button type="button" name="button" id="base-right"
+            onmousedown="buttonBaseRightDown()"
+            onmouseup = "buttonBaseUp()">
+              RIGHT
+            </button>
+
+            <button type="button" name="button" id="arm-front"
+            onmousedown="buttonArmFrontDown()"
+            onmouseup = "buttonArmUp()">
+              FRONT
+            </button>
+            <button type="button" name="button" id="arm-back"
+            onmousedown="buttonArmBackDown()"
+            onmouseup = "buttonArmUp()">
+              BACK
+            </button>
+
+            <button type="button" name="button" id="arm-front"
+            onmousedown="buttonForeArmFrontDown()"
+            onmouseup = "buttonForeArmUp()">
+              FRONT
+            </button>
+            <button type="button" name="button" id="arm-back"
+            onmousedown="buttonForeArmBackDown()"
+            onmouseup = "buttonForeArmUp()">
+              BACK
+            </button>
+          </div>
+
+          <p id="brasRobotique"></p>
+
+          <script src="js/controls.js"></script> <!-- Buttons + Keys Controls -->
+          <script src="js/robot.js"></script> <!-- Robotic Arm 3D model -->
         <script>addToDOM();</script>
     </body>
 </html>
