@@ -28,6 +28,7 @@ const Coordinates = {
         } else if (orientation === "z") {
             grid.rotation.z = -Math.PI / 2;
         }
+        this.clearGrid(orientation)
         scene.add(grid);
     },
     drawGround: function (params) {
