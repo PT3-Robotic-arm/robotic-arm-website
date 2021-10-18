@@ -1,6 +1,10 @@
 "use strict"; // good practice - see https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Strict_mode
 /*global THREE, scene*/
 const Coordinates = {
+    clearGrid: function(orientation) {
+        const toRemove = scene.getObjectByName("grid-" + orientation);
+        scene.remove(toRemove);
+    },
     drawGrid: function (params) {
         params = params || {};
         const size = params.size !== undefined ? params.size : 100;
@@ -10,6 +14,7 @@ const Coordinates = {
             new THREE.PlaneGeometry(size, size, size * scale, size * scale),
             new THREE.MeshBasicMaterial({color: 0x555555, wireframe: true})
         );
+        grid.name = "grid-" + orientation;
         // Yes, these are poorly labeled! It would be a mess to fix.
         // What's really going on here:
         // "x" means "rotate 90 degrees around x", etc.

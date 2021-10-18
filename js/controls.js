@@ -106,9 +106,9 @@ gridxbutton.addEventListener('click', (event) => {
     if(gridxbutton.checked){
         gridX = true;
         drawHelpers();
-    }else if(gridxbutton.unchecked){
+    } else {
         gridX = false;
-        drawHelpers();
+        Coordinates.clearGrid("x")
     } 
 });
 

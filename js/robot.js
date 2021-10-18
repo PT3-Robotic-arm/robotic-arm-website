@@ -284,8 +284,6 @@ function init() {
 
     // RENDERER
     renderer = new THREE.WebGLRenderer({antialias: true, alpha: true});
-    renderer.gammaInput = true;
-    renderer.gammaOutput = true;
     renderer.setSize(canvasWidth, canvasHeight);
     //renderer.setClearColor(0xAAAAAA, 1.0);
     renderer.setClearColor( 0x000000, 0 );
