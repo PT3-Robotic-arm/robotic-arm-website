@@ -8,11 +8,11 @@ const clock = new THREE.Clock();
 
 let camera, scene, renderer;
 let cameraControls, effectController;
-let gridX = true;
+let gridX;
 let gridY = false;
 let gridZ = false;
 let axes = true;
-let ground = true;
+let ground = false;
 let arm, forearm, socleCyl, body, handLeft, handRight;
 let leftB, rightB, topB, bottomB;
 
@@ -283,11 +283,10 @@ function init() {
     const canvasRatio = canvasWidth / canvasHeight;
 
     // RENDERER
-    renderer = new THREE.WebGLRenderer({antialias: true});
-    renderer.gammaInput = true;
-    renderer.gammaOutput = true;
+    renderer = new THREE.WebGLRenderer({antialias: true, alpha: true});
     renderer.setSize(canvasWidth, canvasHeight);
-    renderer.setClearColor(0xAAAAAA, 1.0);
+    //renderer.setClearColor(0xAAAAAA, 1.0);
+    renderer.setClearColor( 0x000000, 0 );
 
     // CAMERA
     camera = new THREE.PerspectiveCamera(38, canvasRatio, 1, 10000);
