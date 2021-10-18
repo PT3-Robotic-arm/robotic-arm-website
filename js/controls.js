@@ -23,11 +23,13 @@ const rotateCylinder = (param) => setTimeout(() => {
 })
 function buttonBaseLeftDown(){
     isBaseRotating = true;
-    rotateCylinder(1)
+    let sensivity = document.getElementById('sensivity-slider').value;
+    rotateCylinder(sensivity)
 }
 function buttonBaseRightDown(){
+    let sensivity = document.getElementById('sensivity-slider').value;
     isBaseRotating = true;
-    rotateCylinder(-1)
+    rotateCylinder(-sensivity)
 }
 function buttonBaseUp(){
     isBaseRotating = false
@@ -51,12 +53,14 @@ const moveArm = (param) => setTimeout(() => {
     moveArm(param)
 })
 function buttonArmFrontDown(){
+    let sensivity = document.getElementById('sensivity-slider').value;
     isArmMoving = true;
-    moveArm(1)
+    moveArm(sensivity)
 }
 function buttonArmBackDown(){
+    let sensivity = document.getElementById('sensivity-slider').value;
     isArmMoving = true;
-    moveArm(-1)
+    moveArm(-sensivity)
 }
 function buttonArmUp(){
     isArmMoving = false
@@ -89,12 +93,13 @@ const moveForeArm = (param) => setTimeout(() => {
     moveForeArm(param)
 })
 function buttonForeArmFrontDown(){
+    let sensivity = document.getElementById('sensivity-slider').value;
     isForeArmMoving = true;
-    moveForeArm(1)
+    moveForeArm(sensivity)
 }
 function buttonForeArmBackDown(){
     isForeArmMoving = true;
-    moveForeArm(-1)
+    moveForeArm(-sensivity)
 }
 function buttonForeArmUp(){
     isForeArmMoving = false
@@ -121,7 +126,6 @@ gridybutton.addEventListener('change', (event) => {
         gridY = false;
         Coordinates.clearGrid("y");
     }
-    
 });
 
 const gridzbutton = document.getElementById("gridz-input");
@@ -135,6 +139,7 @@ gridzbutton.addEventListener('change', (event) => {
     }
     
 });
+
 
 /*
 leftB =  document.getElementById("base-left");
