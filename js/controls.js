@@ -4,36 +4,80 @@
 ////////////////////////////////////////////////////////////////////////////////
 /*global THREE, Coordinates, $, document, window, dat*/
 
-let isBaseRotating = false;
-const rotateCylinder = (param) => setTimeout(() => {
 
+let isBaseRotating = false;
+//Makes the base rotating
+const rotateBase = (param) => setTimeout(() => {
+
+    //We put the maximum and minimum values that the base can reach
     const MIN_LIMIT = -90*Math.PI/180;
     const MAX_LIMIT = 90*Math.PI/180;
+
+    //If the base is between the limits, then it can rotate
     if(socleCyl.rotation.y <= MAX_LIMIT && socleCyl.rotation.y >= MIN_LIMIT){
         socleCyl.rotation.y += param * Math.PI/180;
-    } else {
-        if (socleCyl.rotation.y < 0)
+    } else { //If not, we give it the right position 
+        if (socleCyl.rotation.y < 0)// We use 0 to know on which side we are 
             socleCyl.rotation.y = -90*Math.PI/180;
         else
             socleCyl.rotation.y = 90*Math.PI/180 
     }
     
     if (isBaseRotating)
-    rotateCylinder(param)
+    rotateBase(param)
 })
+//Listeners on "right" and "left" buttons 
+//if they are pressed, we make the base rotate
 function buttonBaseLeftDown(){
     isBaseRotating = true;
     let sensivity = document.getElementById('sensivity-slider').value;
-    rotateCylinder(sensivity)
+    rotateBase(sensivity)
 }
 function buttonBaseRightDown(){
     let sensivity = document.getElementById('sensivity-slider').value;
     isBaseRotating = true;
-    rotateCylinder(-sensivity)
+    rotateBase(-sensivity)
 }
+//else, we stop rotating
 function buttonBaseUp(){
     isBaseRotating = false
 }
+
+//Keyboard events when a key is pressed
+document.addEventListener('keydown', (e) => {
+    let sensivity = document.getElementById('sensivity-slider').value;
+    if (e.code === "ArrowRight"){
+        isArmMoving = true;
+        moveArm(sensivity);
+    }
+    else if (e.code === "ArrowLeft"){
+        isArmMoving = true;
+        moveArm(-sensivity);
+    }
+    else if (e.code === "ArrowUp"){
+        isForeArmMoving = true;
+        moveForeArm(-sensivity);
+    }
+    else if (e.code === "ArrowDown"){
+        isForeArmMoving = true;
+        moveForeArm(sensivity);
+    }
+    else if (e.keyCode == 81){
+        isBaseRotating = true;
+        rotateBase(sensivity);
+    }
+    else if (e.keyCode == 68){
+        isBaseRotating = true;
+        rotateBase(-sensivity);
+    }    
+});
+
+
+document.addEventListener('keyup', (e) => {
+    if (e.code === "ArrowRight" || e.code === "ArrowLeft") isArmMoving = false;
+    else if(e.code === "ArrowUp" || e.code === "ArrowDown") isForeArmMoving = false;
+    else isBaseRotating = false;
+  });
 
 let isArmMoving = false;
 const moveArm = (param) => setTimeout(() => {
@@ -71,8 +115,6 @@ const moveForeArm = (param) => setTimeout(() => {
 
     const MIN_LIMIT = -10*Math.PI/180;
     const MAX_LIMIT = 90*Math.PI/180;
-    console.log("MIN_LIMIT: " + MIN_LIMIT)
-    console.log("MAX_LIMIT: " + MAX_LIMIT)
     if(forearm.rotation.z <= MAX_LIMIT && forearm.rotation.z >= MIN_LIMIT){
         forearm.rotation.z += param * Math.PI / 180;
     } else {
