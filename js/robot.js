@@ -13,7 +13,7 @@ let gridY = false;
 let gridZ = false;
 let axes = true;
 let ground = false;
-let arm, forearm, socleCyl, body, handLeft, handRight;
+let arm, forearm, socleCyl,socleCube, body, handLeft, handRight;
 let leftB, rightB, topB, bottomB;
 
 
@@ -58,48 +58,6 @@ function fillScene() {
         shininess: 100
     });
 
-    //Faire tout le socle avec une fonction !!
-
-    const hsocleCube = 25;
-    const lsocleCube = 70;
-
-    const armYpos = 53;
-
-    const socleCube = new THREE.Mesh(
-        new THREE.BoxGeometry(lsocleCube, hsocleCube, lsocleCube),
-        robotBaseMaterial);
-    //torus.rotation.x = 90 * Math.PI/180;
-    socleCube.position.y = hsocleCube / 2;
-    scene.add(socleCube);
-
-    //------------------------------
-    /*
-    var hsocleCyl1 = 9;
-    var dsocleCyl = 57/2;
-
-    var hsocleCyl2 = 39;
-    var dTopSocleCyl2 = 57/2-5;
-
-
-    var socleCyl1 = new THREE.Mesh(
-        new THREE.CylinderGeometry( dsocleCyl, dsocleCyl, hsocleCyl1, 40 ),
-        robotBaseMaterial
-    );
-    socleCyl1.position.y = hsocleCube+hsocleCyl1/2;
-    //socleCyl1.position.z -= 4;
-    scene.add(socleCyl1);
-
-
-    var socleCyl2 = new THREE.Mesh(
-        new THREE.CylinderGeometry( dTopSocleCyl2, dsocleCyl, hsocleCyl2, 4 ),
-        robotBaseMaterial
-    );
-    socleCyl2.position.y = hsocleCube+hsocleCyl2/2;
-    socleCyl2.rotation.y += 95;
-    scene.add(socleCyl2);
-    */
-    //-----------------------------
-
     forearm = new THREE.Object3D();
     const faLength = 57;
 
@@ -114,16 +72,26 @@ function fillScene() {
 
     createSocleCyl(socleCyl, robotBaseMaterial);
 
+    socleCube = new THREE.Object3D();
+
+    createSocle(socleCube, robotBaseMaterial);
+
     // Move the forearm itself to the end of the upper arm.
     forearm.position.y = uaLength;
     arm.add(forearm);
 
+    const armYpos = 53;
     arm.position.y += armYpos;
 
+    arm.rotation.z = 20*Math.PI/180;
+    forearm.rotation.z = 50*Math.PI/180;
     //Put the socle
     socleCyl.add(arm);
+    socleCyl.rotation.y = 90*Math.PI/180;
 
-    scene.add(socleCyl);
+    socleCube.add(socleCyl);
+
+    scene.add(socleCube);
 
     const handLength = 38;
 
@@ -141,7 +109,19 @@ function fillScene() {
     forearm.add(handRight);
 }
 
-function createSocleCyl(part, material) {
+function createSocle(part, material) {
+
+    const hsocleCube = 25;
+    const lsocleCube = 70;
+
+    const socleCube = new THREE.Mesh(
+        new THREE.BoxGeometry(lsocleCube, hsocleCube, lsocleCube), material);
+    socleCube.position.y = hsocleCube / 2;
+    part.add(socleCube);
+}
+
+function createSocleCyl(part, material){
+    
     const dsocleCyl = 57 / 2;
 
     const hsocleCyl2 = 25;
