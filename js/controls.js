@@ -31,18 +31,19 @@ const rotateBase = (param) => setTimeout(() => {
 function buttonBaseLeftDown(){
     isBaseRotating = true;
     let sensivity = document.getElementById('sensivity-slider').value;
-    rotateBase(sensivity)
+    rotateBase(-sensivity)
 }
 function buttonBaseRightDown(){
     let sensivity = document.getElementById('sensivity-slider').value;
     isBaseRotating = true;
-    rotateBase(-sensivity)
+    rotateBase(sensivity)
 }
 //else, we stop rotating
 function buttonBaseUp(){
     isBaseRotating = false
 }
-
+const base_right = document.getElementById('base-left');
+const base_left = document.getElementById('base-right');
 //Keyboard events when a key is pressed
 document.addEventListener('keydown', (e) => {
     let sensivity = document.getElementById('sensivity-slider').value;
@@ -64,11 +65,15 @@ document.addEventListener('keydown', (e) => {
     }
     else if (e.keyCode == 81){
         isBaseRotating = true;
-        rotateBase(sensivity);
+        rotateBase(-sensivity);
+        //Style of the button when we press the key
+        base_right.style.background = '#f00';
     }
     else if (e.keyCode == 68){
         isBaseRotating = true;
-        rotateBase(-sensivity);
+        rotateBase(sensivity);
+        //Style of the button when we press the key
+        base_left.style.background = '#f00';
     }    
 });
 
@@ -76,7 +81,11 @@ document.addEventListener('keydown', (e) => {
 document.addEventListener('keyup', (e) => {
     if (e.code === "ArrowRight" || e.code === "ArrowLeft") isArmMoving = false;
     else if(e.code === "ArrowUp" || e.code === "ArrowDown") isForeArmMoving = false;
-    else isBaseRotating = false;
+    else{
+        isBaseRotating = false;
+        base_right.style.background = 'none';
+        base_left.style.background ='none';
+    }
   });
 
 let isArmMoving = false;
