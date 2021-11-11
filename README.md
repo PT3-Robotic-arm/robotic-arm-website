@@ -1,21 +1,21 @@
-# Robotic-arm-project
+# Robotic-arm-website
 
-Technical Institute project based on a [Dobot Magician](https://www.dobot.cc/dobot-magician/product-overview.html) robotic arm.
-
-## Goals
-
-- Vizualise the arm in real time to preview its collisions
+This website's purposes are : 
+- Visualize a robotic arm in real time
 - Taking vectors in input and translate them into angular movements adapted to the robot
 - Control the arm from the browser
 
+Based on a [Dobot Magician](https://www.dobot.cc/dobot-magician/product-overview.html) robotic arm.
+
 ## Technologies used
 
-- [three.js](https://threejs.org/) library is used for the 3D model
-- WebUSB is used to communicate from arduino to the browser
-- Javascript is used to convert vectors into angular movements
+- Javascript is used for all the controls and events and for the [three.js](https://threejs.org/) library. 
 
-## Contributors
+## Preview 
 
-## Progression
+![image](https://user-images.githubusercontent.com/79083274/141349074-410b6c63-0264-422d-823e-e7b48803c488.png)
 
+## Warning 
+
+This project still in developpement and is not finished yet ! 
 
