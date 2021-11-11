@@ -26,65 +26,93 @@ const rotateBase = (param) => setTimeout(() => {
     if (isBaseRotating)
     rotateBase(param)
 })
+
+
+const button_color = "#f00";
+const base_right = document.getElementById('base-left');
+const base_left = document.getElementById('base-right');
+
 //Listeners on "right" and "left" buttons 
 //if they are pressed, we make the base rotate
 function buttonBaseLeftDown(){
     isBaseRotating = true;
     let sensivity = document.getElementById('sensivity-slider').value;
     rotateBase(-sensivity)
+    base_right.style.background = button_color;
 }
 function buttonBaseRightDown(){
     let sensivity = document.getElementById('sensivity-slider').value;
     isBaseRotating = true;
     rotateBase(sensivity)
+    base_left.style.background = button_color;
 }
 //else, we stop rotating
 function buttonBaseUp(){
     isBaseRotating = false
+    base_left.style.background = 'none';
+    base_right.style.background = 'none';
 }
-const base_right = document.getElementById('base-left');
-const base_left = document.getElementById('base-right');
+
+const forearm_back = document.getElementById("fore-arm-back");
+const forearm_front = document.getElementById("fore-arm-front");
+const arm_back = document.getElementById("arm-back");
+const arm_front = document.getElementById("arm-front");
+
 //Keyboard events when a key is pressed
 document.addEventListener('keydown', (e) => {
     let sensivity = document.getElementById('sensivity-slider').value;
     if (e.code === "ArrowRight"){
         isArmMoving = true;
         moveArm(sensivity);
+        arm_back.style.background = button_color;
     }
     else if (e.code === "ArrowLeft"){
         isArmMoving = true;
         moveArm(-sensivity);
+        arm_front.style.background = button_color;
     }
     else if (e.code === "ArrowUp"){
         isForeArmMoving = true;
         moveForeArm(-sensivity);
+        forearm_back.style.background = button_color;
     }
     else if (e.code === "ArrowDown"){
         isForeArmMoving = true;
         moveForeArm(sensivity);
+        forearm_front.style.background = button_color;
     }
     else if (e.keyCode == 81){
         isBaseRotating = true;
         rotateBase(-sensivity);
         //Style of the button when we press the key
-        base_right.style.background = '#f00';
+        base_right.style.background = button_color;
     }
     else if (e.keyCode == 68){
         isBaseRotating = true;
         rotateBase(sensivity);
         //Style of the button when we press the key
-        base_left.style.background = '#f00';
+        base_left.style.background = button_color;
     }    
 });
 
 
 document.addEventListener('keyup', (e) => {
-    if (e.code === "ArrowRight" || e.code === "ArrowLeft") isArmMoving = false;
-    else if(e.code === "ArrowUp" || e.code === "ArrowDown") isForeArmMoving = false;
+    if (e.code === "ArrowRight" || e.code === "ArrowLeft") {
+        isArmMoving = false;
+        arm_back.style.background = 'none';
+        arm_front.style.background = 'none';
+    } 
+    else if(e.code === "ArrowUp" || e.code === "ArrowDown") {
+        isForeArmMoving = false;
+        forearm_back.style.background = 'none';
+        forearm_front.style.background = 'none';
+    }
     else{
         isBaseRotating = false;
         base_right.style.background = 'none';
-        base_left.style.background ='none';
+        base_left.style.background = 'none';
+
+
     }
   });
 
@@ -109,14 +137,18 @@ function buttonArmFrontDown(){
     let sensivity = document.getElementById('sensivity-slider').value;
     isArmMoving = true;
     moveArm(sensivity)
+    arm_front.style.background = button_color;
 }
 function buttonArmBackDown(){
     let sensivity = document.getElementById('sensivity-slider').value;
     isArmMoving = true;
     moveArm(-sensivity)
+    arm_back.style.background = button_color;
 }
 function buttonArmUp(){
     isArmMoving = false
+    arm_front.style.background = 'none';
+    arm_back.style.background = 'none';
 }
 
 let isForeArmMoving = false;
@@ -147,14 +179,18 @@ function buttonForeArmFrontDown(){
     let sensivity = document.getElementById('sensivity-slider').value;
     isForeArmMoving = true;
     moveForeArm(sensivity)
+    forearm_front.style.background = button_color;
 }
 function buttonForeArmBackDown(){
     let sensivity = document.getElementById('sensivity-slider').value;
     isForeArmMoving = true;
     moveForeArm(-sensivity)
+    forearm_back.style.background = button_color;
 }
 function buttonForeArmUp(){
     isForeArmMoving = false
+    forearm_front.style.background = 'none';
+    forearm_back.style.background = 'none';
 }
 
 
