@@ -9,7 +9,7 @@ Based on a [Dobot Magician](https://www.dobot.cc/dobot-magician/product-overview
 
 ## Technologies used
 
-- Javascript is used for all the controls and events and for the [three.js](https://threejs.org/) library. 
+- Javascript is used for all controls, event management and for the [three.js](https://threejs.org/) library. 
 
 ## Preview 
 
