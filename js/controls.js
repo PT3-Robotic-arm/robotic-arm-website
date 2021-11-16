@@ -228,6 +228,33 @@ gridzbutton.addEventListener('change', (event) => {
     
 });
 
+const realtime_visualize = document.getElementById("real-time-visualize");
+let dataInterval;
+
+realtime_visualize.addEventListener('change', (event) => {
+    if (realtime_visualize.checked) {
+
+        dataInterval = setInterval(() => {
+            getData();
+        }, 500);
+
+        /** 
+         * Récupérer les accélérations x,y ou z en fonction de la partie à bouger
+         * Faire un calcul pour que l'accélération en m/s soit convertie (intervalle 500 ms -> m = ? )
+         * 1 cm ~= 3,87096774193548 three.js unit
+
+        */
+
+
+
+
+    }else{
+        //Stopper intervalle
+        clearInterval(dataInterval);
+    }
+    
+});
+
 
 /*
 leftB =  document.getElementById("base-left");
