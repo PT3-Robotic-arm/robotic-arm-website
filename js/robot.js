@@ -108,38 +108,39 @@ function fillScene() {
     handRight.position.y = faLength;
     forearm.add(handRight);
 }
-
+//Creating the cubic base of the 
 function createSocle(part, material) {
 
-    const hsocleCube = 25;
-    const lsocleCube = 70;
+    const hsocleCube = 25; //height
+    const lsocleCube = 70; //width
 
     const socleCube = new THREE.Mesh(
         new THREE.BoxGeometry(lsocleCube, hsocleCube, lsocleCube), material);
-    socleCube.position.y = hsocleCube / 2;
-    part.add(socleCube);
+    socleCube.position.y = hsocleCube / 2; //material
+    part.add(socleCube); //we add it to the part passed in parameter
 }
 
+//Creating the cylinder of the base
 function createSocleCyl(part, material){
     
-    const dsocleCyl = 57 / 2;
+    const dsocleCyl = 57 / 2; //diameter of the bottom
 
-    const hsocleCyl2 = 25;
-    const dTopSocleCyl2 = 57 / 2 - 5;
+    const hsocleCyl2 = 25; //Height
+    const dTopSocleCyl2 = 57 / 2 - 5; //diameter of the top
 
     const socleCyl1 = new THREE.Mesh(
         new THREE.CylinderGeometry(dsocleCyl, dsocleCyl, 9, 40),
-        material);
-    socleCyl1.position.y = 25 + 9 / 2;
+        material); //Material of the cylinder
+    socleCyl1.position.y = 25 + 9 / 2; //Position
     //socleCyl1.position.z -= 4;
-    part.add(socleCyl1);
+    part.add(socleCyl1); //adding it to the part passed in parameters
 
     const socleCyl2 = new THREE.Mesh(
         new THREE.CylinderGeometry(dTopSocleCyl2, dsocleCyl, hsocleCyl2, 4),
-        material);
+        material); //Second cylinder
     socleCyl2.position.y = 25 + hsocleCyl2 / 2;
     socleCyl2.rotation.y += 95;
-    part.add(socleCyl2);
+    part.add(socleCyl2); //Adding the second cylinder (below the first one)
 
     /*
     var box = new THREE.Mesh(
@@ -150,6 +151,7 @@ function createSocleCyl(part, material){
     part.add( box );
     */
 
+    //Adding aesthetic elements to make the model looking like the dobot magician
     for (let i = 0; i < 2; i++) {
         const box = new THREE.Mesh(
             new THREE.BoxGeometry(30, 20, 2),

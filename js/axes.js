@@ -1,6 +1,7 @@
 "use strict"; // good practice - see https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Strict_mode
 /*global THREE, scene*/
 const Coordinates = {
+    //removes grid from the scene
     clearGrid: function(orientation) {
         const toRemove = scene.getObjectByName("grid-" + orientation);
         scene.remove(toRemove);
