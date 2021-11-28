@@ -39,73 +39,70 @@
               </label>
             </div>
   
+            <div class="control-panel" id="control-panel">
+              <div style="display: flex; align-items: center;">
+                <input id="sensivity-slider" type="range" min="1" max="5" step="1"  value="2">
+                <label for="sensivity-slider">Sensivity</label>
+              </div>
+              
+              <div class="arm-control-panel" id="arm-control-panel">
   
-            <div style="display: flex; align-items: center;">
-              <input id="sensivity-slider" type="range" min="1" max="5" step="1"  value="2">
-              <label for="sensivity-slider">Sensivity</label>
+                <div>
+                  <button type="button" name="button" id="base-left" 
+                  onmousedown="buttonBaseLeftDown()"
+                  onmouseup = "buttonBaseUp()">
+                    Q
+                  </button>
+                  
+                  <button type="button" name="button" id="base-right"
+                  onmousedown="buttonBaseRightDown()"
+                  onmouseup = "buttonBaseUp()">
+                    D
+                  </button>
+                </div>
+  
+                <div class="arrow-controls">
+                  <!-- Forearm up-->
+                  <button type="button" name="button" id="fore-arm-back"
+                  onmousedown="buttonForeArmBackDown()"
+                  onmouseup = "buttonForeArmUp()">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" height="24" width="24">
+                      <path xmlns="http://www.w3.org/2000/svg" d="M7 14L12 8L17 14L7 14Z" fill="#0D0D0D"></path>
+                    </svg>
+                  </button>
+  
+                  <div>
+                    <!-- Arm down-->
+                    <button type="button" name="button" id="arm-front"
+                    onmousedown="buttonArmFrontDown()"
+                    onmouseup = "buttonArmUp()">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" height="24" width="24">
+                      <path xmlns="http://www.w3.org/2000/svg" d="M14 17L8 12L14 7L14 17Z" fill="#0D0D0D"></path>
+                    </svg>
+                    </button>
+                    <!-- arm up-->
+                    <button type="button" name="button" id="arm-back"
+                    onmousedown="buttonArmBackDown()"
+                    onmouseup = "buttonArmUp()">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" height="24" width="24">
+                      <path xmlns="http://www.w3.org/2000/svg" d="M10 7L16 12L10 17L10 7Z" fill="#0D0D0D"></path>
+                    </svg>
+                    </button>
+  
+                  </div>
+  
+                  <button type="button" name="button" id="fore-arm-front"
+                  onmousedown="buttonForeArmFrontDown()"
+                  onmouseup = "buttonForeArmUp()">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" height="24" width="24">
+                      <path xmlns="http://www.w3.org/2000/svg" d="M17 10L12 16L7 10H17Z" fill="#0D0D0D"></path>
+                    </svg>
+                  </button>
+  
+                </div>
+              </div>
             </div>
             
-            <div class="control-panel">
-
-              <div>
-                <button type="button" name="button" id="base-left" 
-                onmousedown="buttonBaseLeftDown()"
-                onmouseup = "buttonBaseUp()">
-                  Q
-                </button>
-                
-                <button type="button" name="button" id="base-right"
-                onmousedown="buttonBaseRightDown()"
-                onmouseup = "buttonBaseUp()">
-                  D
-                </button>
-              </div>
-
-              <div class="arrow-controls">
-                <!-- Forearm up-->
-                <button type="button" name="button" id="fore-arm-back"
-                onmousedown="buttonForeArmBackDown()"
-                onmouseup = "buttonForeArmUp()">
-                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" height="24" width="24">
-                    <path xmlns="http://www.w3.org/2000/svg" d="M7 14L12 8L17 14L7 14Z" fill="#0D0D0D"></path>
-                  </svg>
-                </button>
-
-                <div>
-                  <!-- Arm down-->
-                  <button type="button" name="button" id="arm-front"
-                  onmousedown="buttonArmFrontDown()"
-                  onmouseup = "buttonArmUp()">
-                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" height="24" width="24">
-                    <path xmlns="http://www.w3.org/2000/svg" d="M14 17L8 12L14 7L14 17Z" fill="#0D0D0D"></path>
-                  </svg>
-                  </button>
-                  <!-- arm up-->
-                  <button type="button" name="button" id="arm-back"
-                  onmousedown="buttonArmBackDown()"
-                  onmouseup = "buttonArmUp()">
-                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" height="24" width="24">
-                    <path xmlns="http://www.w3.org/2000/svg" d="M10 7L16 12L10 17L10 7Z" fill="#0D0D0D"></path>
-                  </svg>
-                  </button>
-
-                </div>
-
-                <button type="button" name="button" id="fore-arm-front"
-                onmousedown="buttonForeArmFrontDown()"
-                onmouseup = "buttonForeArmUp()">
-                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" height="24" width="24">
-                    <path xmlns="http://www.w3.org/2000/svg" d="M17 10L12 16L7 10H17Z" fill="#0D0D0D"></path>
-                  </svg>
-                </button>
-
-              </div>
-
-
-  
-
-
-            </div>
           </div>
           
 

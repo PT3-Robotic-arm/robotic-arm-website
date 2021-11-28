@@ -31,6 +31,15 @@
       }
 
       .control-panel{
+        height: 40%;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        align-items: center;
+      }
+
+      .arm-control-panel{
         height: 100px;
         width: 200px;
         display: flex;

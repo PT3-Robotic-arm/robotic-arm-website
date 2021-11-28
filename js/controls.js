@@ -4,6 +4,12 @@
 ////////////////////////////////////////////////////////////////////////////////
 /*global THREE, Coordinates, $, document, window, dat*/
 
+const control_panel = document.getElementById("control-panel");
+
+/*--------------- Arm Controls ---------------*/
+
+let arm_controls = true;
+
 
 let isBaseRotating = false;
 //Makes the base rotating
@@ -13,18 +19,20 @@ const rotateBase = (param) => setTimeout(() => {
     const MIN_LIMIT = -90*Math.PI/180;
     const MAX_LIMIT = 90*Math.PI/180;
 
-    //If the base is between the limits, then it can rotate
-    if(socleCyl.rotation.y <= MAX_LIMIT && socleCyl.rotation.y >= MIN_LIMIT){
-        socleCyl.rotation.y += param * Math.PI/180;
-    } else { //If not, we give it the right position 
-        if (socleCyl.rotation.y < 0)// We use 0 to know on which side we are 
-            socleCyl.rotation.y = -90*Math.PI/180;
-        else
-            socleCyl.rotation.y = 90*Math.PI/180 
+    if (isBaseRotating && arm_controls) {
+         //If the base is between the limits, then it can rotate
+        if(socleCyl.rotation.y <= MAX_LIMIT && socleCyl.rotation.y >= MIN_LIMIT){
+            socleCyl.rotation.y += param * Math.PI/180;
+        } 
+        rotateBase(param);
     }
-    
-    if (isBaseRotating)
-    rotateBase(param)
+    else{ //If not, we give it the right position 
+        // We use 0 to know on which side we are 
+        if (socleCyl.rotation.y <= MAX_LIMIT && socleCyl.rotation.y >= MIN_LIMIT) socleCyl.rotation.y += 0;
+        else if (socleCyl.rotation.y < 0) socleCyl.rotation.y = -90*Math.PI/180;
+        else socleCyl.rotation.y = 90*Math.PI/180;
+            
+    }
 })
 
 //color of the buttons when a key is pressed, kind of a :active effect
@@ -57,6 +65,88 @@ function buttonBaseUp(){
     isBaseRotating = false
     base_left.style.background = 'none';
     base_right.style.background = 'none';
+}
+
+//First part of the arm 
+let isArmMoving = false;
+const moveArm = (param) => setTimeout(() => {
+    //We put the maximum and minimum values that the part can reach
+    const MIN_LIMIT = 0*Math.PI/180;
+    const MAX_LIMIT = 85*Math.PI/180;
+
+    if (isArmMoving && arm_controls) {
+        //If the base is between the limits, then it can move
+        if(arm.rotation.z <= MAX_LIMIT && arm.rotation.z >= MIN_LIMIT){
+            arm.rotation.z += param * Math.PI / 180;
+        }
+    moveArm(param);
+
+    }
+    else {//If not, we recover on which limit it is and "freeze" it
+        if (arm.rotation.z <= MAX_LIMIT && arm.rotation.z >= MIN_LIMIT) arm.rotation.z += 0;
+        else if (arm.rotation.z <= 0) arm.rotation.z = 0*Math.PI/180;
+        else arm.rotation.z = 85*Math.PI/180;
+    }
+})
+
+//if a button is pressed (down), we move the arm on the direction corresponding
+//We also change its color
+function buttonArmFrontDown(){
+    let sensivity = document.getElementById('sensivity-slider').value;
+    isArmMoving = true;
+    moveArm(sensivity)
+    arm_front.style.background = button_color;
+}
+function buttonArmBackDown(){
+    let sensivity = document.getElementById('sensivity-slider').value;
+    isArmMoving = true;
+    moveArm(-sensivity)
+    arm_back.style.background = button_color;
+}
+//if a button is released, we stop rotation
+//we also change its color
+function buttonArmUp(){
+    isArmMoving = false
+    arm_front.style.background = 'none';
+    arm_back.style.background = 'none';
+}
+
+//Same things for the second part of the arm 
+let isForeArmMoving = false;
+const moveForeArm = (param) => setTimeout(() => {
+
+    const MIN_LIMIT = -10*Math.PI/180;
+    const MAX_LIMIT = 90*Math.PI/180;
+
+    if(isForeArmMoving && arm_controls){
+        if (forearm.rotation.z <= MAX_LIMIT && forearm.rotation.z >= MIN_LIMIT) {
+            forearm.rotation.z += param * Math.PI / 180;
+        }
+        moveForeArm(param);
+    }
+    else {
+        if (forearm.rotation.z <= MAX_LIMIT && forearm.rotation.z >= MIN_LIMIT) forearm.rotation.z += 0;
+        else if (forearm.rotation.z < 0) forearm.rotation.z = -10*Math.PI/180;
+        else forearm.rotation.z = 90*Math.PI/180;  
+    }
+    
+})
+function buttonForeArmFrontDown(){
+    let sensivity = document.getElementById('sensivity-slider').value;
+    isForeArmMoving = true;
+    moveForeArm(sensivity)
+    forearm_front.style.background = button_color;
+}
+function buttonForeArmBackDown(){
+    let sensivity = document.getElementById('sensivity-slider').value;
+    isForeArmMoving = true;
+    moveForeArm(-sensivity)
+    forearm_back.style.background = button_color;
+}
+function buttonForeArmUp(){
+    isForeArmMoving = false
+    forearm_front.style.background = 'none';
+    forearm_back.style.background = 'none';
 }
 
 // All these const are the buttons on the page (to change their colors)
@@ -129,91 +219,9 @@ document.addEventListener('keyup', (e) => {
     }
   });
 
-//First part of the arm 
-let isArmMoving = false;
-const moveArm = (param) => setTimeout(() => {
-    //We put the maximum and minimum values that the part can reach
-    const MIN_LIMIT = 0*Math.PI/180;
-    const MAX_LIMIT = 85*Math.PI/180;
-    //If the base is between the limits, then it can move
-    if(arm.rotation.z <= MAX_LIMIT && arm.rotation.z >= MIN_LIMIT){
-        arm.rotation.z += param * Math.PI / 180;
-    } else {//If not, we recover on which limit it is and "freeze" it
-        if (arm.rotation.z < 0)
-            arm.rotation.z = 0*Math.PI/180;
-        else
-            arm.rotation.z = 85*Math.PI/180 
-    }
-    
-    if (isArmMoving)
-    moveArm(param)
-})
 
-//if a button is pressed (down), we move the arm on the direction corresponding
-//We also change its color
-function buttonArmFrontDown(){
-    let sensivity = document.getElementById('sensivity-slider').value;
-    isArmMoving = true;
-    moveArm(sensivity)
-    arm_front.style.background = button_color;
-}
-function buttonArmBackDown(){
-    let sensivity = document.getElementById('sensivity-slider').value;
-    isArmMoving = true;
-    moveArm(-sensivity)
-    arm_back.style.background = button_color;
-}
-//if a button is released, we stop rotation
-//we also change its color
-function buttonArmUp(){
-    isArmMoving = false
-    arm_front.style.background = 'none';
-    arm_back.style.background = 'none';
-}
+/*--------------- Grid Controls ---------------*/
 
-
-//Same things for the second part of the arm 
-let isForeArmMoving = false;
-const moveForeArm = (param) => setTimeout(() => {
-
-    const MIN_LIMIT = -10*Math.PI/180;
-    const MAX_LIMIT = 90*Math.PI/180;
-    if(forearm.rotation.z <= MAX_LIMIT && forearm.rotation.z >= MIN_LIMIT){
-        forearm.rotation.z += param * Math.PI / 180;
-    } else {
-        console.log(forearm.rotation.z)
-        if (forearm.rotation.z < 0){
-          forearm.rotation.z = -10*Math.PI/180;
-          console.log("setting to -10")
-        }
-        else{
-            forearm.rotation.z = 90*Math.PI/180 
-            console.log("setting to 90")
-        }
-        
-            
-    }
-    
-    if (isForeArmMoving)
-    moveForeArm(param)
-})
-function buttonForeArmFrontDown(){
-    let sensivity = document.getElementById('sensivity-slider').value;
-    isForeArmMoving = true;
-    moveForeArm(sensivity)
-    forearm_front.style.background = button_color;
-}
-function buttonForeArmBackDown(){
-    let sensivity = document.getElementById('sensivity-slider').value;
-    isForeArmMoving = true;
-    moveForeArm(-sensivity)
-    forearm_back.style.background = button_color;
-}
-function buttonForeArmUp(){
-    isForeArmMoving = false
-    forearm_front.style.background = 'none';
-    forearm_back.style.background = 'none';
-}
 
 //these grid buttons allows us to display or not the x,y and z grids on the 3d scene
 const gridxbutton = document.getElementById("gridx-input"); //Button
@@ -255,10 +263,17 @@ gridzbutton.addEventListener('change', (event) => {
 const realtime_visualize = document.getElementById("real-time-visualize");
 let dataInterval;
 
+
+/*--------------- Visualizer Controls ---------------*/
+
+
 // If the button visualize is checked, we fetch data in an interval of 500ms
 // it is like a for which fetches with infinity
 realtime_visualize.addEventListener('change', (event) => {
     if (realtime_visualize.checked) {
+
+        arm_controls = false;
+        control_panel.style.background = "gray";
 
         dataInterval = setInterval(() => {
             getData();
@@ -275,12 +290,11 @@ realtime_visualize.addEventListener('change', (event) => {
          * 
         */
 
-
-
-
     }else{
         //Else we stop the interval
         clearInterval(dataInterval);
+        arm_controls = true;
+        control_panel.style.background = "none";
     }
     
 });
