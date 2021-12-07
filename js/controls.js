@@ -259,13 +259,10 @@ gridzbutton.addEventListener('change', (event) => {
     
 });
 
+/*--------------- Visualizer Controls ---------------*/
 
 const realtime_visualize = document.getElementById("real-time-visualize");
 let dataInterval;
-
-
-/*--------------- Visualizer Controls ---------------*/
-
 
 // If the button visualize is checked, we fetch data in an interval of 500ms
 // it is like a for which fetches with infinity
@@ -274,10 +271,12 @@ realtime_visualize.addEventListener('change', (event) => {
 
         arm_controls = false;
         control_panel.style.background = "gray";
+        let data;
 
         dataInterval = setInterval(() => {
-            getData();
+            data = getLatest();
         }, 500);
+
 
         /** 
          * Si capteur affiche orientation (c'est le cas)
