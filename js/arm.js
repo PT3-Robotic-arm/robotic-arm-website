@@ -35,6 +35,7 @@ function angles(A, B, C, COld) {
         coudeBaseAngle: coudeBaseAngle
     };
 }
+/*
 let previousData;
 const i = setInterval(async () => {
     let currentData = await getLatest();
@@ -50,3 +51,4 @@ const i = setInterval(async () => {
     previousData = currentData;
     //console.log(currentData);
 }, 500);
+ */

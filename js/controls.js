@@ -273,8 +273,33 @@ realtime_visualize.addEventListener('change', (event) => {
         control_panel.style.background = "gray";
         let data;
 
-        dataInterval = setInterval(() => {
+        let previousData;
+        dataInterval = setInterval(async () => {
             data = getLatest();
+
+            
+            let currentData = await getLatest();
+
+            if (previousData) {
+                let captorOne = currentData.values[0];
+                let captorTwo = currentData.values[1];
+                let oldCaptorTwo = previousData.values[1];
+
+                let degres = angles([0, 0], [captorOne.x, captorOne.y], [captorTwo.x, captorTwo.y], [oldCaptorTwo.x, oldCaptorTwo.y]);
+
+                //Rotation de la base
+                socleCyl.rotation.y += degres["rotationAngle"] * Math.PI/180;
+
+                //Rotation de la première partie du bras près de la base
+                arm.rotation.z += degres["coudeBaseAngle"] * Math.PI / 180;
+
+                //Rotation de la deuxième partie du bras
+                forearm.rotation.z += degres["coudeAngle"] * Math.PI / 180;
+
+            }
+
+            previousData = currentData;
+
         }, 500);
 
 
