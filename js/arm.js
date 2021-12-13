@@ -1,24 +1,5 @@
-"use strict"; // good practice - see https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Strict_mode
-////////////////////////////////////////////////////////////////////////////////
-// Robot hand exercise: add a second grabber and have it respond
-////////////////////////////////////////////////////////////////////////////////
-/*global THREE, Coordinates, $, document, window, dat*/
+"use strict";
 
-/** 
- * Function that fetches data from our API on localhost:3000
- * each data object has an id and position informations
- * getLastest/ : get latest position (latest id)
- * getSince/:id : get all positions from the element which has the id given
- * getRow/:id : get a precise element from its id
-*/
-async function getLatest(){
-    return new Promise(async (resolve, reject) => {
-        let data = await fetch(`http://127.0.0.1:3000/api/getLatest`)
-        data = await data.json();
-        
-        resolve(data);
-    })
-}
 function angles(A, B, C, COld) {
     // A are the coordinates of the first captor placed on the arm base
     // B are the coordinates of the second captor placed ont the arm elbow
@@ -54,3 +35,18 @@ function angles(A, B, C, COld) {
         coudeBaseAngle: coudeBaseAngle
     };
 }
+let previousData;
+const i = setInterval(async () => {
+    let currentData = await getLatest();
+
+    if (previousData) {
+        let captorOne = currentData.values[0];
+        let captorTwo = currentData.values[1];
+        let oldCaptorTwo = previousData.values[1];
+
+        console.log(angles([0, 0], [captorOne.x, captorOne.y], [captorTwo.x, captorTwo.y], [oldCaptorTwo.x, oldCaptorTwo.y]))
+    }
+
+    previousData = currentData;
+    //console.log(currentData);
+}, 500);
