@@ -288,13 +288,13 @@ realtime_visualize.addEventListener('change', (event) => {
                 let degres = angles([0, 0], [captorOne.x, captorOne.y], [captorTwo.x, captorTwo.y], [oldCaptorTwo.x, oldCaptorTwo.y]);
 
                 //Rotation de la base
-                socleCyl.rotation.y += degres["rotationAngle"] * Math.PI/180;
+                socleCyl.rotation.y = degres["rotationAngle"] * Math.PI/180;
 
                 //Rotation de la première partie du bras près de la base
-                arm.rotation.z += degres["coudeBaseAngle"] * Math.PI / 180;
+                arm.rotation.z = degres["coudeBaseAngle"] * Math.PI / 180;
 
                 //Rotation de la deuxième partie du bras
-                forearm.rotation.z += degres["coudeAngle"] * Math.PI / 180;
+                forearm.rotation.z = degres["coudeAngle"] * Math.PI / 180;
 
             }
 
