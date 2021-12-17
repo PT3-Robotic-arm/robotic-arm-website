@@ -300,7 +300,7 @@ realtime_visualize.addEventListener('change', (event) => {
 
             previousData = currentData;
 
-        }, 500);
+        }, 50);
 
 
         /** 
@@ -322,11 +322,3 @@ realtime_visualize.addEventListener('change', (event) => {
     }
     
 });
-
-
-/*
-leftB =  document.getElementById("base-left");
-leftB.addEventListener('click', (event) => {
-  console.log("Je vais à gauche");
-  socleCyl.rotation.y += 1*Math.PI/180;
-});*/
