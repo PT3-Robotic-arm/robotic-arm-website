@@ -1,210 +1,175 @@
+:root{
+  --button-bg-color: #092c3e;
+}
 
-      *,::before,::after{
-        margin: 0;
-        padding: 0;
-      }
+*,::before,::after{
+  margin: 0;
+  padding: 0;
+}
 
-      .bod{
-        height: 100vh;
-        display: flex;
-        justify-content: space-around;
-        align-items: center;
-      }
-
-
-      header{
-
-
-          z-index: 1;
-          width: 100%;
-          display: flex;
-          height: 115px;
-          justify-content: space-between;
-          align-items: center;
-
-      }
+section{
+  height: 100vh;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
 
 
+header{
+    z-index: 1;
+    width: 100%;
+    display: flex;
+    height: 115px;
+    justify-content: space-between;
+    align-items: center;
+}
 
-      .logo{
-          width:  100px;
-          display: flex;
-          justify-content: center;
-          padding-left: 35px;
-      }
+ul{
+    justify-content: space-around;
+    z-index: 1;
+    width: 250px;
+    display: flex;
+    align-items: center;
+}
 
+#home-icon{
+  margin-left: 64px;
+}
 
-      .logo img{
+#A{
+    border-left: none;
+}
 
+ul li{
+    display: inline;
+    flex-direction: initial;
+}
 
-          height: 40px;
-          width: 40px;
-          margin-left: 20px;
+ul li a{
+    text-decoration: none;
+    /*border-left: solid;*/
+    border-width: 1px;
+}
 
-      }
+.controls{
+  height: 500px;
+  width: 500px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  border: 2px solid black;
+  border-radius: 10px;
+}
 
-      .navigation{
-          justify-content: space-around;
-          z-index: 1;
-          width: 250px;
-          display: flex;
-          align-items: center;
+.control-grid-panel{
+  height: 150px;
+  width: 150px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
 
+.control-panel{
+  height: 40%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+}
 
-      }
-      #A{
-          border-left: none;
-      }
+.arm-control-panel{
+  height: 100px;
+  width: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
 
-      .navigation li{
+.arrow-controls{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
 
-          display: inline;
-          flex-direction: initial;
+button{
+  height: 30px;
+  width: 30px;
+  background: none;
+  border: 2px solid var(--button-bg-color);
+  border-radius: 10px;
+}
 
-      }
-      .Accueil{
-          color: #092c3e;
-      }
-      .propos{
-          color: #092c3e;
+label{
+  display: flex;
+  justify-content: space-around;
+}
 
-      }
+input[type="checkbox"]{
+    visibility: hidden;
+    display: none;
 
-      .navigation li a{
+}
+.check{
+    position: relative;
+    display: block;
+    width: 40px;
+    height: 20px;
+    background: var(--button-bg-color);
+    cursor: pointer;
+    border: 1px solid var(--button-bg-color);
+    border-radius: 20px;
+    overflow: hidden;
+    transition: ease-in 0.5s;
+}
 
-          padding: 4px 20px;
+.dot{
+    position: absolute;
+    top:  2px;
+    left: 4px;
+    background: #fff;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    transition: 0.5s;
+}
 
+.dotlight{
+    position: absolute;
+    top:  2px;
+    left: 4px;
+    background: url("icons/sun.svg");
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    transition: 0.5s;
+}
 
-          text-decoration: none;
-          /*border-left: solid;*/
-          border-width: 1px;
-      }
+.check1{
+    position: relative;
+    display: block;
+    width: 29px;
+    height: 29px;
+    border-radius: 20px;
+    overflow: hidden;
+    transition: ease-in 0.5s;
+}
 
-      .controls{
-        height: 500px;
-        width: 500px;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: space-around;
-        border: 2px solid black;
-        border-radius: 10px;
-      }
+input[type="checkbox"]:checked ~ .check1 > span
+{
+    background: url("icons/moon.svg");
+}
 
-      .control-grid-panel{
-        height: 150px;
-        width: 150px;
-        display: flex;
-        flex-direction: column;
-        justify-content: space-around;
-      }
+/*Checkboxes in control panel*/
 
-      .control-panel{
-        height: 40%;
-        width: 100%;
-        display: flex;
-        flex-direction: column;
-        justify-content: space-around;
-        align-items: center;
-      }
+input[type="checkbox"]:checked ~ .check
+{
+    background: #fff;
+}
 
-      .arm-control-panel{
-        height: 100px;
-        width: 200px;
-        display: flex;
-        align-items: center;
-        justify-content: space-around;
-      }
-
-      .arrow-controls{
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-      }
-
-      button{
-        height: 30px;
-        width: 30px;
-        background: none;
-        border: 2px solid #092c3e;
-        border-radius: 10px;
-      }
-
-      label{
-        display: flex;
-        justify-content: space-around;
-      }
-
-      input[type="checkbox"]{
-          visibility: hidden;
-          display: none;
-
-      }
-      .check{
-          position: relative;
-          display: block;
-          width: 40px;
-          height: 20px;
-          background: #092c3e;
-          cursor: pointer;
-          border: 1px solid #092c3e;
-          border-radius: 20px;
-          overflow: hidden;
-          transition: ease-in 0.5s;
-      }
-
-      .dot{
-          position: absolute;
-          top:  2px;
-          left: 4px;
-          background: #fff;
-          width: 16px;
-          height: 16px;
-          border-radius: 50%;
-          transition: 0.5s;
-
-
-      }
-      .dotlight{
-          position: absolute;
-          top:  2px;
-          left: 4px;
-          background: url("img/sun.svg");
-
-          width: 25px;
-          height: 25px;
-          border-radius: 50%;
-          transition: 0.5s;
-
-
-      }
-      .check1{
-          position: relative;
-          display: block;
-          width: 29px;
-          height: 29px;
-
-
-          border-radius: 20px;
-          overflow: hidden;
-          transition: ease-in 0.5s;
-      }
-
-      input[type="checkbox"]:checked ~ .check
-      {
-          background: #fff;
-      }
-
-      input[type="checkbox"]:checked ~ .check > span
-      {
-          background: #092c3e;
-          transform: translateX(16px);
-      }
-
-
-      input[type="checkbox"]:checked ~ .check1 > span
-      {
-          background:  url("img/moon.svg");
-
-
-      }
+input[type="checkbox"]:checked ~ .check > span
+{
+    background: var(--button-bg-color);
+    transform: translateX(16px);
+}

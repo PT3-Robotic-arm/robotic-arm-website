@@ -15,38 +15,15 @@
     </head>
     <body>
         <header>
-
-            <label class="logo">
-
-
-                <a href="https://iutsd.univ-lorraine.fr/"><img src="img/sd.jpg"></a>
-                <a href="https://www.univ-lorraine.fr/"><img src="img/Logo_Université_de_Lorraine.svg.png"></a>
-
-
-
-            </label>
-
+            <a href="index.html"><img src="icons/home.svg" id="home-icon" class="icon"></a>
             <ul class="navigation">
-
-                <a href="index.html"><img src="img/home.svg" class="icon"></a>
-
-
-
-
                 <label>
                     <input type="checkbox" name="ldmod" >
-                    <div class="check1"> <span class="dotlight"></span> </div>
-
-
-
-
+                    <div class="check1"> <span class="dotlight"></span></div>
                 </label>
-
-
-
             </ul>
         </header>
-        <div class="bod">
+        <section>
           <div class="controls">
             <div class="control-grid-panel">
               <label>
@@ -85,13 +62,13 @@
                   <button type="button" name="button" id="base-left" 
                   onmousedown="buttonBaseLeftDown()"
                   onmouseup = "buttonBaseUp()">
-                    <p class="Gauche">Q</p>
+                    <p id="gauche">Q</p>
                   </button>
                   
                   <button type="button" name="button" id="base-right"
                   onmousedown="buttonBaseRightDown()"
                   onmouseup = "buttonBaseUp()">
-                    <p class="Droite">D</p>
+                    <p id="droite">D</p>
                   </button>
                 </div>
   
@@ -100,7 +77,7 @@
                   <button type="button" name="button" id="fore-arm-back"
                   onmousedown="buttonForeArmBackDown()"
                   onmouseup = "buttonForeArmUp()">
-                  <img src="icons/caret-up.svg" class="icon">
+                  <img src="icons/caret-up.svg" class="icon" id="arrow-up">
 
                   </button>
   
@@ -109,13 +86,13 @@
                     <button type="button" name="button" id="arm-front"
                     onmousedown="buttonArmFrontDown()"
                     onmouseup = "buttonArmUp()">
-                    <img src="icons/caret-left.svg" class="icon">
+                    <img src="icons/caret-left.svg" class="icon" id="arrow-left">
                     </button>
                     <!-- arm up-->
                     <button type="button" name="button" id="arm-back"
                     onmousedown="buttonArmBackDown()"
                     onmouseup = "buttonArmUp()">
-                    <img src="icons/caret-right.svg" class="icon">
+                    <img src="icons/caret-right.svg" class="icon" id="arrow-right">
                     </button>
   
                   </div>
@@ -123,7 +100,7 @@
                   <button type="button" name="button" id="fore-arm-front"
                   onmousedown="buttonForeArmFrontDown()"
                   onmouseup = "buttonForeArmUp()">
-                  <img src="icons/caret-down.svg" class="icon">
+                  <img src="icons/caret-down.svg" class="icon" id="arrow-down">
                   </button>
   
                 </div>
@@ -142,7 +119,7 @@
           <script src="js/app.js"></script>
 
 
-        <script>addToDOM();</script>
-        </div>
+          <script>addToDOM();</script>
+        </section>
     </body>
 </html>
