@@ -12,7 +12,7 @@ function angles(A, B, C, COld) {
 
     // AC is the vector after the movement
     const AC = [C[0] - A[0], C[1] - A[1]];
-    const rotationAngle = (Math.atan2(ACOld[1] * AC[0] - ACOld[0] * AC[1], ACOld[0] * AC[0] + ACOld[1] * AC[1]) * 180 / Math.PI);
+    const rotationAngle = (Math.atan2(ACOld[1] * AC[0] - ACOld[0] * AC[1], ACOld[0] * AC[0] + ACOld[1] * AC[1]) * 180/Math.PI);
 
     // Calcul of the angle of the second elbow (in the middle of the arm)
 
@@ -21,13 +21,13 @@ function angles(A, B, C, COld) {
 
     // BC vector is the vector between the elbow and the edge
     const BC = [C[0] - B[0], C[1] - B[1]];
-    const rotationCoude = (Math.atan2(BC[1] * AB[0] - BC[0] * AB[1], BC[0] * AB[0] + BC[1] * AB[1]) * 180 / Math.PI);
+    const rotationCoude = (Math.atan2(BC[1] * AB[0] - BC[0] * AB[1], BC[0] * AB[0] + BC[1] * AB[1]) * 180/Math.PI);
 
     // Calcul of the angle of the first elbow (at the base of the arm)
 
     // AA is the vector representing the absis 
     const AA = [0,1];
-    const coudeBaseAngle = (Math.atan2(AA[1] * AB[0] - AA[0] * AB[1], AA[0] * AB[0] + AA[1] * AB[1]) * 180 / Math.PI);
+    const coudeBaseAngle = (Math.atan2(AA[1] * AB[0] - AA[0] * AB[1], AA[0] * AB[0] + AA[1] * AB[1]) * 180/Math.PI);
 
     return {
         rotationAngle: rotationAngle,

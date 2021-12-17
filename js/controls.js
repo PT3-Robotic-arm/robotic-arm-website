@@ -271,14 +271,12 @@ realtime_visualize.addEventListener('change', (event) => {
 
         arm_controls = false;
         control_panel.style.background = "gray";
-        let data;
 
         let previousData;
         dataInterval = setInterval(async () => {
-            data = getLatest();
-
             
             let currentData = await getLatest();
+            console.log(currentData);
 
             if (previousData) {
                 let captorOne = currentData.values[0];
@@ -291,16 +289,16 @@ realtime_visualize.addEventListener('change', (event) => {
                 socleCyl.rotation.y = degres["rotationAngle"] * Math.PI/180;
 
                 //Rotation de la première partie du bras près de la base
-                arm.rotation.z = degres["coudeBaseAngle"] * Math.PI / 180;
+                arm.rotation.z = degres["coudeBaseAngle"] * Math.PI/180;
 
                 //Rotation de la deuxième partie du bras
-                forearm.rotation.z = degres["coudeAngle"] * Math.PI / 180;
+                forearm.rotation.z = degres["coudeAngle"] *Math.PI/180;
 
             }
 
             previousData = currentData;
 
-        }, 50);
+        }, 250);
 
 
         /** 
