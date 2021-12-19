@@ -14,8 +14,3 @@ Based on a [Dobot Magician](https://www.dobot.cc/dobot-magician/product-overview
 ## Preview 
 
 ![image](https://user-images.githubusercontent.com/79083274/141349074-410b6c63-0264-422d-823e-e7b48803c488.png)
-
-## Warning 
-
-This project still in developpement and is not finished yet ! 
-
