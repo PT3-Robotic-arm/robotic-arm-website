@@ -14,6 +14,12 @@
 async function getLatest(){
     return new Promise(async (resolve, reject) => {
         let data = await fetch(`http://127.0.0.1:3000/api/getLatest`)
+
+        if (!data.ok){
+            console.log("status :", data.status);
+            await getLatest();
+        }
+
         data = await data.json();
         
         resolve(data);

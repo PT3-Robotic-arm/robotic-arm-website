@@ -279,9 +279,9 @@ realtime_visualize.addEventListener('change', (event) => {
             console.log(currentData);
 
             if (previousData) {
-                let captorOne = currentData.values[0];
-                let captorTwo = currentData.values[1];
-                let oldCaptorTwo = previousData.values[1];
+                let captorOne = currentData[0];
+                let captorTwo = currentData[1];
+                let oldCaptorTwo = previousData[1];
 
                 let degres = angles([0, 0], [captorOne.x, captorOne.y], [captorTwo.x, captorTwo.y], [oldCaptorTwo.x, oldCaptorTwo.y]);
 
@@ -298,7 +298,7 @@ realtime_visualize.addEventListener('change', (event) => {
 
             previousData = currentData;
 
-        }, 250);
+        }, 100);
 
 
         /** 
