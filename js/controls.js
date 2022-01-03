@@ -157,6 +157,7 @@ const arm_front = document.getElementById("arm-front");
 
 //Keyboard events when a key is pressed
 document.addEventListener('keydown', (e) => {
+    e.preventDefault();
     //We recover the value of the sentivity in order to move the parts of the robot with the speed choosed. 
     let sensivity = document.getElementById('sensivity-slider').value;
 
@@ -198,6 +199,7 @@ document.addEventListener('keydown', (e) => {
 
 //Keyboard events when a key is released
 document.addEventListener('keyup', (e) => {
+    e.preventDefault();
     //depending on the key of the event that is pressed (down)
     //we stop the movement of the corresponding part and reset its background
     if (e.code === "ArrowRight" || e.code === "ArrowLeft") {
@@ -272,6 +274,38 @@ realtime_visualize.addEventListener('change', (event) => {
         arm_controls = false;
         control_panel.style.background = "gray";
 
+        dataInterval = setInterval(async () => {
+            
+            let currentData = await getLatest();
+            //console.log(currentData);
+
+            let captorbottom = currentData[0];
+            let captortop = currentData[1];
+
+            let captorbottom_asin = Math.asin(captorbottom.acc_x/10);
+            let captortop_asin = Math.asin(captortop.acc_x/10);
+            let captortop_sin = captortop.acc_y/10;
+
+
+            //console.log(captorbottom.acc_x + " " + captorbottom.acc_y);
+            //console.log( "angle partie inférieure" + captorbottom_asin);
+            console.log( "angle : " + captortop_sin + ", "+ captortop_asin);
+
+
+            arm.rotation.z = captorbottom_asin;
+
+            if (captortop_sin > 0 ) {
+                forearm.rotation.z = - captortop_asin + Math.PI;
+            }else{
+                forearm.rotation.z = captortop_asin;
+            }
+            
+
+            
+
+        }, 100);
+
+        /*
         let previousData;
         dataInterval = setInterval(async () => {
             
@@ -299,7 +333,7 @@ realtime_visualize.addEventListener('change', (event) => {
             previousData = currentData;
 
         }, 100);
-
+        */
 
         /** 
          * Si capteur affiche orientation (c'est le cas)

@@ -1,5 +1,13 @@
 "use strict";
 
+/**
+ * This function dosen't work because it was expecting that the sensors were returning coordinates
+ * @param {*} A 
+ * @param {*} B 
+ * @param {*} C 
+ * @param {*} COld 
+ * @returns 
+ */
 function angles(A, B, C, COld) {
     // A are the coordinates of the first captor placed on the arm base
     // B are the coordinates of the second captor placed ont the arm elbow
@@ -35,20 +43,3 @@ function angles(A, B, C, COld) {
         coudeBaseAngle: coudeBaseAngle
     };
 }
-/*
-let previousData;
-const i = setInterval(async () => {
-    let currentData = await getLatest();
-
-    if (previousData) {
-        let captorOne = currentData.values[0];
-        let captorTwo = currentData.values[1];
-        let oldCaptorTwo = previousData.values[1];
-
-        console.log(angles([0, 0], [captorOne.x, captorOne.y], [captorTwo.x, captorTwo.y], [oldCaptorTwo.x, oldCaptorTwo.y]))
-    }
-
-    previousData = currentData;
-    //console.log(currentData);
-}, 500);
- */
