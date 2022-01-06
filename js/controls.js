@@ -286,23 +286,26 @@ realtime_visualize.addEventListener('change', (event) => {
             let captortop_asin = Math.asin(captortop.acc_x/10);
             let captortop_sin = captortop.acc_y/10;
 
+            let captorbottom_atan = - Math.atan((captorbottom.acc_x / 10) / (captorbottom.acc_y / 10));
 
-            //console.log(captorbottom.acc_x + " " + captorbottom.acc_y);
+            let captortop_atan = - Math.atan((captortop.acc_x / 10) / (captortop.acc_y / 10));
+
+
             //console.log( "angle partie inférieure" + captorbottom_asin);
-            console.log( "angle : " + captortop_sin + ", "+ captortop_asin);
+            //console.log( "angle : " + captortop_sin + ", "+ captortop_asin);
 
 
-            arm.rotation.z = captorbottom_asin;
+            arm.rotation.z = captorbottom_atan;
+
+            let alpha = captortop_atan - captorbottom_atan;
 
             if (captortop_sin > 0 ) {
-                forearm.rotation.z = - captortop_asin + Math.PI;
+                forearm.rotation.z = alpha + Math.PI;
+                //forearm.rotation.z = - captortop_asin + Math.PI; ligne précédente
             }else{
-                forearm.rotation.z = captortop_asin;
+                forearm.rotation.z = alpha;
+                //forearm.rotation.z = captortop_asin; ligne précédente
             }
-            
-
-            
-
         }, 100);
 
         /*
