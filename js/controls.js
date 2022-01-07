@@ -303,63 +303,22 @@ realtime_visualize.addEventListener('change', (event) => { //Interactions of the
 
             arm.rotation.z = arm_angle; //We apply the arm's angle to the Three.js model 
 
-            let alpha = forearm_angle - arm_angle; 
+            let alpha = forearm_angle - arm_angle; //Alpha is the forearm angle - arm angle. 
+            // We apply it to the forearm because we change the landmark (repère in french)
 
-            if (sensortop_sin > 0 ) {
+            if (sensortop_sin > 0 ) { //if sinus > 0, then we just apply the angle
                 forearm.rotation.z = alpha;
-                //forearm.rotation.z = - sensortop_asin + Math.PI; Utilisé dans la première version
+                //forearm.rotation.z = - sensortop_asin + Math.PI; Used in first version
             }else{
-                forearm.rotation.z = alpha+Math.PI;
-                //forearm.rotation.z = sensortop_asin; Utilisé dans la première version
+                forearm.rotation.z = alpha + Math.PI; //else we add Math.PI To reverse it 
+                //forearm.rotation.z = sensortop_asin; Used in first version
             }
-        }, 100);
+        }, 100); //Reapeat every 0.1s
 
-        /*
-        let previousData;
-        dataInterval = setInterval(async () => {
-            
-            let currentData = await getLatest();
-            console.log(currentData);
-
-            if (previousData) {
-                let sensorOne = currentData[0];
-                let sensorTwo = currentData[1];
-                let oldsensorTwo = previousData[1];
-
-                let degres = angles([0, 0], [sensorOne.x, sensorOne.y], [sensorTwo.x, sensorTwo.y], [oldsensorTwo.x, oldsensorTwo.y]);
-
-                //Rotation de la base
-                socleCyl.rotation.y = degres["rotationAngle"] * Math.PI/180;
-
-                //Rotation de la première partie du bras près de la base
-                arm.rotation.z = degres["coudeBaseAngle"] * Math.PI/180;
-
-                //Rotation de la deuxième partie du bras
-                forearm.rotation.z = degres["coudeAngle"] *Math.PI/180;
-
-            }
-
-            previousData = currentData;
-
-        }, 100);
-        */
-
-        /** 
-         * Si capteur affiche orientation (c'est le cas)
-         * Simplement appliquer les rotations au robot
-         * 
-         * Sinon :
-         * Récupérer les accélérations x,y ou z en fonction de la partie à bouger
-         * Faire un calcul pour que l'accélération en m/s soit convertie (intervalle 500 ms -> m = ? )
-         * 1 cm ~= 3,87096774193548 three.js unit
-         * 
-        */
-
-    }else{
-        //Else we stop the interval
-        clearInterval(dataInterval);
-        arm_controls = true;
-        control_panel.style.background = "none";
+    }else{ // if visualize button if not checked
+        clearInterval(dataInterval); //Clearing the interval = stop fetching 
+        arm_controls = true; //Arm-controls are enabled again
+        control_panel.style.background = "none"; //Control panel dosen't have the gray background anymore
     }
     
 });
