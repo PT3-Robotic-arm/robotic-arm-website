@@ -268,43 +268,49 @@ let dataInterval;
 
 // If the button visualize is checked, we fetch data in an interval of 500ms
 // it is like a for which fetches with infinity
-realtime_visualize.addEventListener('change', (event) => {
-    if (realtime_visualize.checked) {
+realtime_visualize.addEventListener('change', (event) => { //Interactions of the "visualize" button
+    if (realtime_visualize.checked) { //If it is checked
 
-        arm_controls = false;
-        control_panel.style.background = "gray";
+        arm_controls = false; //We disbale arm controls
+        control_panel.style.background = "gray"; // To mean that controls are disbaled, we change the bg of the controls panel
 
-        dataInterval = setInterval(async () => {
-            
-            let currentData = await getLatest();
+        dataInterval = setInterval(async () => { //Every 0.1 second, we execute this code, only if getLatest() returns something
+        
+            let currentData = await getLatest(); //We fetch data from the API's getLatest path, see fetch.js file
             //console.log(currentData);
 
-            let captorbottom = currentData[0];
-            let captortop = currentData[1];
+            let sensorbottom = currentData[0]; // Sensor on the arm
+            let sensortop = currentData[1]; // Sensor on the forearm
 
-            let captorbottom_asin = Math.asin(captorbottom.acc_x/10);
-            let captortop_asin = Math.asin(captortop.acc_x/10);
-            let captortop_sin = captortop.acc_y/10;
+            //let sensorbottom_asin = Math.asin(sensorbottom.acc_x/10); Utilisé dans la première version
+            //let sensortop_asin = Math.asin(sensortop.acc_x/10); Utilisé dans la première version
 
-            let captorbottom_atan = - Math.atan((captorbottom.acc_x / 10) / (captorbottom.acc_y / 10));
+            /*
+                We use a trigonometric circle, the data we get is acc_x and acc_y
+                It matches with cos(angle) and sin(angle) 
+                angle is the orientation of the arm and the forearm
+            */
+            let sensortop_sin = sensortop.acc_y/10; //Sinus of the top sensor
 
-            let captortop_atan = - Math.atan((captortop.acc_x / 10) / (captortop.acc_y / 10));
+            let arm_angle = - Math.atan((sensorbottom.acc_x / 10) / (sensorbottom.acc_y / 10)); //Angle of the arm calculated with tan and arctan
+
+            let forearm_angle = - Math.atan((sensortop.acc_x / 10) / (sensortop.acc_y / 10)); // Angle of the arm calculated with tan and arctan
 
 
-            //console.log( "angle partie inférieure" + captorbottom_asin);
-            //console.log( "angle : " + captortop_sin + ", "+ captortop_asin);
+            //console.log( "angle partie inférieure" + sensorbottom_asin);
+            //console.log( "angle : " + sensortop_sin + ", "+ sensortop_asin);
 
 
-            arm.rotation.z = captorbottom_atan;
+            arm.rotation.z = arm_angle; //We apply the arm's angle to the Three.js model 
 
-            let alpha = captortop_atan - captorbottom_atan;
+            let alpha = forearm_angle - arm_angle; 
 
-            if (captortop_sin > 0 ) {
-                forearm.rotation.z = alpha + Math.PI;
-                //forearm.rotation.z = - captortop_asin + Math.PI; ligne précédente
-            }else{
+            if (sensortop_sin > 0 ) {
                 forearm.rotation.z = alpha;
-                //forearm.rotation.z = captortop_asin; ligne précédente
+                //forearm.rotation.z = - sensortop_asin + Math.PI; Utilisé dans la première version
+            }else{
+                forearm.rotation.z = alpha+Math.PI;
+                //forearm.rotation.z = sensortop_asin; Utilisé dans la première version
             }
         }, 100);
 
@@ -316,11 +322,11 @@ realtime_visualize.addEventListener('change', (event) => {
             console.log(currentData);
 
             if (previousData) {
-                let captorOne = currentData[0];
-                let captorTwo = currentData[1];
-                let oldCaptorTwo = previousData[1];
+                let sensorOne = currentData[0];
+                let sensorTwo = currentData[1];
+                let oldsensorTwo = previousData[1];
 
-                let degres = angles([0, 0], [captorOne.x, captorOne.y], [captorTwo.x, captorTwo.y], [oldCaptorTwo.x, oldCaptorTwo.y]);
+                let degres = angles([0, 0], [sensorOne.x, sensorOne.y], [sensorTwo.x, sensorTwo.y], [oldsensorTwo.x, oldsensorTwo.y]);
 
                 //Rotation de la base
                 socleCyl.rotation.y = degres["rotationAngle"] * Math.PI/180;
