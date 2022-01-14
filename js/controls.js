@@ -274,6 +274,9 @@ realtime_visualize.addEventListener('change', (event) => { //Interactions of the
         arm_controls = false; //We disbale arm controls
         control_panel.style.background = "gray"; // To mean that controls are disbaled, we change the bg of the controls panel
 
+        // we store the last ten datas
+        let lastTenDatas = [];
+
         dataInterval = setInterval(async () => { //Every 0.1 second, we execute this code, only if getLatest() returns something
         
             let currentData = await getLatest(); //We fetch data from the API's getLatest path, see fetch.js file
@@ -294,7 +297,7 @@ realtime_visualize.addEventListener('change', (event) => { //Interactions of the
 
             let arm_angle = - Math.atan((sensorbottom.acc_x / 10) / (sensorbottom.acc_y / 10)); //Angle of the arm calculated with tan and arctan
 
-            let forearm_angle = - Math.atan((sensortop.acc_x / 10) / (sensortop.acc_y / 10)); // Angle of the arm calculated with tan and arctan
+            let forearm_angle = - Math.atan((sensortop.acc_x / 10) / (sensortop.acc_y / 10)); // Angle of the forearm calculated with tan and arctan
 
 
             //console.log( "angle partie inférieure" + sensorbottom_asin);
@@ -306,13 +309,37 @@ realtime_visualize.addEventListener('change', (event) => { //Interactions of the
             let alpha = forearm_angle - arm_angle; //Alpha is the forearm angle - arm angle. 
             // We apply it to the forearm because we change the landmark (repère in french)
 
+            let forearm_rotation;
             if (sensortop_sin > 0 ) { //if sinus > 0, then we just apply the angle
-                forearm.rotation.z = alpha;
+                forearm_rotation = alpha;
                 //forearm.rotation.z = - sensortop_asin + Math.PI; Used in first version
             }else{
-                forearm.rotation.z = alpha + Math.PI; //else we add Math.PI To reverse it 
+                forearm_rotation = alpha + Math.PI; //else we add Math.PI To reverse it
                 //forearm.rotation.z = sensortop_asin; Used in first version
             }
+
+            lastTenDatas.push({
+                "arm_angle": arm_angle,
+                "forearm_rotation": forearm_rotation,
+            });
+            if (lastTenDatas.length > 5) {
+                lastTenDatas.shift();
+            }
+
+            // calculate the median value of the last ten datas for the forearm rotation
+            let averageForearmRotation = lastTenDatas.reduce((acc, curr) => {
+                return acc + curr.forearm_rotation;
+            }, 0) / lastTenDatas.length;
+
+            // calculate the median value of the last ten datas for the arm angle
+            let averageArmRotation = lastTenDatas.reduce((acc, curr) => {
+                return acc + curr.arm_angle;
+            }, 0) / lastTenDatas.length;
+
+
+            forearm.rotation.z = averageForearmRotation;
+            arm.rotation.z = averageArmRotation; //We apply the arm's angle to the Three.js model
+
         }, 100); //Reapeat every 0.1s
 
     }else{ // if visualize button if not checked
