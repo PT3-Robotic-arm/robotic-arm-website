@@ -111,7 +111,7 @@ function buttonArmUp(){
     arm_back.style.background = 'none';
 }
 
-//Same things for the second part of the arm 
+//Same for the forearm part
 let isForeArmMoving = false;
 const moveForeArm = (param) => setTimeout(() => {
 
@@ -163,10 +163,12 @@ document.addEventListener('keydown', (e) => {
 
     //depending on the key of the event that is pressed (down), we move the corresponding part of the robot.
     //We also change its color
-    if (e.code === "ArrowRight"){
-        isArmMoving = true;
-        moveArm(sensivity);
-        arm_back.style.background = button_color;
+
+    //For instance : 
+    if (e.code === "ArrowRight"){ //if the right arrow is pressed
+        isArmMoving = true; //We set the boolean to true in order to allow the arm to move
+        moveArm(sensivity); //we move the arm with the sensivity selected before
+        arm_back.style.background = button_color; //We change its color 
     }
     else if (e.code === "ArrowLeft"){
         isArmMoving = true;
@@ -199,21 +201,22 @@ document.addEventListener('keydown', (e) => {
 
 //Keyboard events when a key is released
 document.addEventListener('keyup', (e) => {
-    e.preventDefault();
-    //depending on the key of the event that is pressed (down)
-    //we stop the movement of the corresponding part and reset its background
-    if (e.code === "ArrowRight" || e.code === "ArrowLeft") {
-        isArmMoving = false;
-        arm_back.style.background = 'none';
+    e.preventDefault(); 
+    if (e.code === "ArrowRight" || e.code === "ArrowLeft") { //if an arm control is released 
+        isArmMoving = false; //We stop the arm rotation 
+        //We reset the background of both buttons to none, transparent
+        arm_back.style.background = 'none'; 
         arm_front.style.background = 'none';
     } 
-    else if(e.code === "ArrowUp" || e.code === "ArrowDown") {
-        isForeArmMoving = false;
-        forearm_back.style.background = 'none';
+    else if(e.code === "ArrowUp" || e.code === "ArrowDown") {//if a forearm control is released
+        isForeArmMoving = false; //we stop the forearm rotation 
+        //We reset the background of both buttons to none, transparent
+        forearm_back.style.background = 'none'; 
         forearm_front.style.background = 'none';
     }
     else{
-        isBaseRotating = false;
+        isBaseRotating = false; //if a base control is released
+        //We reset the background of both buttons to none, transparent
         base_right.style.background = 'none';
         base_left.style.background = 'none';
 
@@ -225,38 +228,48 @@ document.addEventListener('keyup', (e) => {
 /*--------------- Grid Controls ---------------*/
 
 
-//these grid buttons allows us to display or not the x,y and z grids on the 3d scene
-const gridxbutton = document.getElementById("gridx-input"); //Button
-//When the button is clicked, if its status is checked, we allow the grid to be displayed and draw it
-gridxbutton.addEventListener('click', (event) => {
-    if(gridxbutton.checked){
-        gridX = true;
-        drawHelpers();
-    } else { //Else we don't allow it to be displayed and we clear the grid with the function clearGrid (in axes.js)
-        gridX = false;
-        Coordinates.clearGrid("x")
+const gridxbutton = document.getElementById("gridx-input"); //grid buttons allows us to display or not the x,y and z grids on the 3d scene
+
+/**
+ * When the button is clicked, if its status is checked, we allow the grid to be displayed and draw it
+ */
+gridxbutton.addEventListener('click', (event) => { //when checkbox is clicked :
+    if(gridxbutton.checked){ //If it is checked
+        gridX = true; //We allow gridx to be displayed
+        drawHelpers(); //We draw it
+    } else { //if it isn't checked
+        gridX = false; //We don't allow the grid to be displayed
+        Coordinates.clearGrid("x") //We clear/remove the grid in the scene (see axes.js)
     } 
 });
 
 const gridybutton = document.getElementById("gridy-input");
+
+/**
+ * When the button is clicked, if its status is checked, we allow the grid to be displayed and draw it
+ */
 gridybutton.addEventListener('change', (event) => {
-    if(gridybutton.checked){
-        gridY = true;
-        drawHelpers();
-    }else{
-        gridY = false;
-        Coordinates.clearGrid("y");
+    if(gridybutton.checked){ //If it is checked
+        gridY = true; //We allow gridx to be displayed
+        drawHelpers(); //We draw it
+    }else{ //If it isn't checked
+        gridY = false; //We don't allow the grid to be displayed
+        Coordinates.clearGrid("y"); //We clear/remove the grid in the scene (see axes.js)
     }
 });
 
 const gridzbutton = document.getElementById("gridz-input");
+
+/**
+ * When the button is clicked, if its status is checked, we allow the grid to be displayed and draw it
+ */
 gridzbutton.addEventListener('change', (event) => {
-    if(gridzbutton.checked){
-        gridZ = true;
-        drawHelpers();
-    }else{
-        gridZ = false;
-        Coordinates.clearGrid("z");
+    if(gridzbutton.checked){ //If it is checked
+        gridZ = true;  //We allow gridx to be displayed
+        drawHelpers(); //We draw it
+    }else{ //If it isn't
+        gridZ = false; //We don't allow the grid to be displayed
+        Coordinates.clearGrid("z"); //We clear/remove the grid in the scene (see axes.js)
     }
     
 });
@@ -284,10 +297,6 @@ realtime_visualize.addEventListener('change', (event) => { //Interactions of the
 
             let sensorbottom = currentData[0]; // Sensor on the arm
             let sensortop = currentData[1]; // Sensor on the forearm
-
-            //let sensorbottom_asin = Math.asin(sensorbottom.acc_x/10); Utilisé dans la première version
-            //let sensortop_asin = Math.asin(sensortop.acc_x/10); Utilisé dans la première version
-
             /*
                 We use a trigonometric circle, the data we get is acc_x and acc_y
                 It matches with cos(angle) and sin(angle) 
@@ -298,13 +307,6 @@ realtime_visualize.addEventListener('change', (event) => { //Interactions of the
             let arm_angle = - Math.atan((sensorbottom.acc_x / 10) / (sensorbottom.acc_y / 10)); //Angle of the arm calculated with tan and arctan
 
             let forearm_angle = - Math.atan((sensortop.acc_x / 10) / (sensortop.acc_y / 10)); // Angle of the forearm calculated with tan and arctan
-
-
-            //console.log( "angle partie inférieure" + sensorbottom_asin);
-            //console.log( "angle : " + sensortop_sin + ", "+ sensortop_asin);
-
-
-            arm.rotation.z = arm_angle; //We apply the arm's angle to the Three.js model 
 
             let alpha = forearm_angle - arm_angle; //Alpha is the forearm angle - arm angle. 
             // We apply it to the forearm because we change the landmark (repère in french)

@@ -37,6 +37,15 @@ function fillScene() {
         specular: 0xCC3399,
         shininess: 20
     });
+
+    const transparentmat = new THREE.MeshPhongMaterial({
+        color: 0x6E23BB,
+        specular: 0x6E23BB,
+        shininess: 20,
+        transparent: true,
+        opacity: 0
+    });
+
     const robotHandRightMaterial = new THREE.MeshPhongMaterial({
         color: 0xDD3388,
         specular: 0xDD3388,
