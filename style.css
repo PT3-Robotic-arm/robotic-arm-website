@@ -1,5 +1,5 @@
 :root{
-  --button-bg-color: #092c3e;
+  --button-bg-color: black;
 }
 
 *,::before,::after{
@@ -38,17 +38,6 @@ ul{
 
 #A{
     border-left: none;
-}
-
-ul li{
-    display: inline;
-    flex-direction: initial;
-}
-
-ul li a{
-    text-decoration: none;
-    /*border-left: solid;*/
-    border-width: 1px;
 }
 
 .controls{
@@ -99,6 +88,7 @@ button{
   background: none;
   border: 2px solid var(--button-bg-color);
   border-radius: 10px;
+
 }
 
 label{
@@ -162,14 +152,7 @@ input[type="checkbox"]:checked ~ .check1 > span
 }
 
 /*Checkboxes in control panel*/
-
-input[type="checkbox"]:checked ~ .check
-{
-    background: #fff;
-}
-
 input[type="checkbox"]:checked ~ .check > span
 {
-    background: var(--button-bg-color);
     transform: translateX(16px);
 }
