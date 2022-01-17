@@ -18,8 +18,8 @@
             <a href="index.html"><img src="icons/home.svg" id="home-icon" class="icon"></a>
             <ul class="navigation">
                 <label>
-                    <input type="checkbox" name="ldmod" >
-                    <div class="check1"> <span class="dotlight"></span></div>
+                    <input type="checkbox" name="ldmod" id="theme-selector-checkbox">
+                    <div class="theme-selector"> <span class="theme-selector-icon"></span></div>
                 </label>
             </ul>
         </header>
@@ -59,13 +59,13 @@
               <div class="arm-control-panel" id="arm-control-panel">
   
                 <div>
-                  <button type="button" name="button" id="base-left" 
+                  <button type="button" name="button" id="base-left" class="armcontrols basecontrols"
                   onmousedown="buttonBaseLeftDown()"
                   onmouseup = "buttonBaseUp()">
                     <p id="gauche">Q</p>
                   </button>
                   
-                  <button type="button" name="button" id="base-right"
+                  <button type="button" name="button" id="base-right" class="armcontrols basecontrols"
                   onmousedown="buttonBaseRightDown()"
                   onmouseup = "buttonBaseUp()">
                     <p id="droite">D</p>
@@ -74,7 +74,7 @@
   
                 <div class="arrow-controls">
                   <!-- Forearm up-->
-                  <button type="button" name="button" id="fore-arm-back"
+                  <button type="button" name="button" id="fore-arm-back" class="armcontrols"
                   onmousedown="buttonForeArmBackDown()"
                   onmouseup = "buttonForeArmUp()">
                   <img src="icons/caret-up.svg" class="icon" id="arrow-up">
@@ -83,13 +83,13 @@
   
                   <div>
                     <!-- Arm down-->
-                    <button type="button" name="button" id="arm-front"
+                    <button type="button" name="button" id="arm-front" class="armcontrols"
                     onmousedown="buttonArmFrontDown()"
                     onmouseup = "buttonArmUp()">
                     <img src="icons/caret-left.svg" class="icon" id="arrow-left">
                     </button>
                     <!-- arm up-->
-                    <button type="button" name="button" id="arm-back"
+                    <button type="button" name="button" id="arm-back" class="armcontrols"
                     onmousedown="buttonArmBackDown()"
                     onmouseup = "buttonArmUp()">
                     <img src="icons/caret-right.svg" class="icon" id="arrow-right">
@@ -97,7 +97,7 @@
   
                   </div>
                   <!-- Forearm down-->
-                  <button type="button" name="button" id="fore-arm-front"
+                  <button type="button" name="button" id="fore-arm-front" class="armcontrols"
                   onmousedown="buttonForeArmFrontDown()"
                   onmouseup = "buttonForeArmUp()">
                   <img src="icons/caret-down.svg" class="icon" id="arrow-down">
