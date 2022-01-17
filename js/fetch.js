@@ -13,15 +13,15 @@
 */
 async function getLatest(){
     return new Promise(async (resolve, reject) => {
-        let data = await fetch(`http://127.0.0.1:3000/api/getLatest`)
+        let data = await fetch(`http://127.0.0.1:3000/api/getLatest`) //waiting for a response of the API and then storing the value returned in data
 
-        if (!data.ok){
-            console.log("status :", data.status);
-            await getLatest();
+        if (!data.ok){ //If there is a problem with the data returned
+            console.log("status :", data.status); //We print it's status in order to debug
+            await getLatest(); // We try to fetch again
         }
 
-        data = await data.json();
+        data = await data.json(); // if there is no probleme, we parse data to json
         
-        resolve(data);
+        resolve(data); //We return data
     })
 }
